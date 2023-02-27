@@ -61,6 +61,7 @@ header a{
   margin-bottom: 10px;
   font-size: 1.5em;
   color: var(--primary);
+  margin-top: 0;
 }
 
 .workoutDetails>p{
@@ -69,15 +70,23 @@ header a{
   color: #57534e;
 }
 
-.workoutDetails>span{
+.date{
+  font-size: 14px!important;
+  color: #16a34a!important;
+}
+
+.workoutDetails>button{
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 20px;
   cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: black;
+  background: #d10606;
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  outline: none;
+  border: none;
+  margin-top: 1rem;
 }
 
 /* Workout form */
@@ -118,5 +127,18 @@ form>button{
 
 form>h3{
   color: var(--primary);
+}
+
+.errors{
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+input.error{
+  border: 1px solid var(--error);
 }
 

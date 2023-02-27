@@ -8,6 +8,7 @@ const AddWorkout = () => {
     const [reps,setReps] = useState('')
     const [load,setLoad] = useState('')
     const [error,setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
     const [success,setSuccess] = useState('')
     const {dispatch} = useWorkoutContext()
 
@@ -28,11 +29,13 @@ const AddWorkout = () => {
 
         if(!response.ok){
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }if(response.ok){
             setError(null)
             setTitle('')
             setReps('')
             setLoad('')
+            setEmptyFields([])
             setSuccess('Workout Added Successfully!')
             console.log('added details', json)
             dispatch({type:'createWorkouts', payload:json})
@@ -50,7 +53,7 @@ const AddWorkout = () => {
             type='text'
             onChange={(e)=>setTitle(e.target.value)}
             value = {title}
-            required
+            className={emptyFields.includes('title')? 'error' : ''}
         />
 
         <label>Load (in kg):</label>
@@ -58,20 +61,20 @@ const AddWorkout = () => {
             type='number'
             onChange={(e)=>setLoad(e.target.value)}
             value = {load}
-            required
+            className={emptyFields.includes('load')? 'error' : ''}
         />
 
         <label>Reps :</label>
         <input 
-            type='number'
+            type='text'
             onChange={(e)=>setReps(e.target.value)}
             value = {reps}
-            required
+            className={emptyFields.includes('reps')? 'error' : ''}
         />
 
         <button type = 'submit'>Add Workout</button>
 
-        {error && <p style = {{color:'red'}}>{error}</p>}
+        {error && <p className='errors'>{error}</p>}
 
     </form>
   )

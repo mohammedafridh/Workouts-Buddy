@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React from 'react'
 import AddWorkout from '../components/pageComponents/homepage/AddWorkout'
 import WorkoutDetails from '../components/pageComponents/homepage/WorkoutDetails'
 

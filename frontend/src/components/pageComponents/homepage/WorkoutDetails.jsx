@@ -1,6 +1,6 @@
-import React, {useState,useEffect} from 'react'
+import React, {useEffect} from 'react'
 import { useWorkoutContext } from '../../../context/WorkoutContext'
-
+import {formatDistanceToNow} from 'date-fns'
 
 const WorkoutDetails = () => {
 
@@ -19,7 +19,7 @@ const WorkoutDetails = () => {
         }
 
         fetchWorkouts()
-    },[workouts])
+    },[dispatch, workouts])
 
     const handleClick = async(id)=>{
        const response =  await fetch('/workout/' + id, {
@@ -41,10 +41,11 @@ const WorkoutDetails = () => {
                     <h4>{workout.title}</h4>
                     <p><strong>Load (kg): </strong>{workout.load}</p>
                     <p><strong>Reps : </strong>{workout.reps}</p>
-                    <p>{workout.createdAt}</p>
-                    <span onClick={()=>handleClick(workout._id)}>
-                        delete
-                    </span>
+                    <p className='date'>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
+                    <button onClick={()=>handleClick(workout._id)}
+                    className = 'material-symbols-outlined'>
+                        Delete
+                    </button>
                 </div>
             ))}
         </div>

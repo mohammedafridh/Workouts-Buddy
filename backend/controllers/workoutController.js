@@ -3,14 +3,29 @@ import workoutModel from "../models/workoutModel.js";
 //add a workout
 export const addWorkout = async(req,res)=>{
 
-    const newWorkout = new workoutModel(req.body)
+    // const newWorkout = new workoutModel(req.body)
+
+    const {title,load,reps} = req.body
+
+    let emptyFields = []
+
+    if(!title){
+        emptyFields.push('title')
+    }if(!load){
+        emptyFields.push('load')
+    }if(!reps){
+        emptyFields.push('reps')
+    }
+    if(emptyFields.length>0){
+        return res.status(400).json({error: '*Please fill all the fields', emptyFields})
+    }
 
     try{
-        await newWorkout.save()
+        const newWorkout = await workoutModel.create({title, load,reps})
         res.status(200).json(newWorkout)
 
     }catch(error){
-        res.status(500).json(error)
+        res.status(500).json({error:error.message})
     }
 }
 
