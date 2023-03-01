@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { useWorkoutContext } from '../../../context/WorkoutContext'
 import {formatDistanceToNow} from 'date-fns'
+import { toast } from 'react-hot-toast'
 
 const WorkoutDetails = () => {
 
@@ -30,6 +31,7 @@ const WorkoutDetails = () => {
 
        if(response.ok){
         dispatch({type:'deleteWorkout', payload:json})
+        toast.success('Workout Deleted Successfully!')
        }
     console.log(id)
     }

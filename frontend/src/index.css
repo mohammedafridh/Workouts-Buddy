@@ -17,7 +17,7 @@ body{
 }
 
 header{
-  background: #B0E0E6;
+  background: #B0E0E6; 
 }
 
 header .container{
@@ -98,11 +98,13 @@ form{
   box-shadow: 3px 3px 5px 6px #ccc;
   padding: 25px;
   border-radius: 6px;
+  text-align: center;
 }
 
 label{
   display: block;
   font-weight: bold;
+  text-align: left;
 }
 
 input{
@@ -125,8 +127,9 @@ form>button{
   cursor: pointer;
 }
 
-form>h3{
+form>h2{
   color: var(--primary);
+  text-align: center;
 }
 
 .errors{
@@ -140,5 +143,25 @@ form>h3{
 
 input.error{
   border: 1px solid var(--error);
+}
+
+/* navbar */
+
+nav{
+  display: flex;
+  align-items: center;
+}
+
+nav a{
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+form.signup{
+  max-width: 300px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
 }
 

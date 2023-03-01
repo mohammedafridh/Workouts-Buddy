@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useWorkoutContext } from '../../../context/WorkoutContext'
-
+import { toast } from 'react-hot-toast'
 
 const AddWorkout = () => {
 
@@ -9,7 +9,7 @@ const AddWorkout = () => {
     const [load,setLoad] = useState('')
     const [error,setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-    const [success,setSuccess] = useState('')
+    // const [success,setSuccess] = useState('')
     const {dispatch} = useWorkoutContext()
 
     const submitHandler = async(e)=>{
@@ -36,17 +36,16 @@ const AddWorkout = () => {
             setReps('')
             setLoad('')
             setEmptyFields([])
-            setSuccess('Workout Added Successfully!')
-            console.log('added details', json)
+            toast.success('Workout Added Successfully!')
             dispatch({type:'createWorkouts', payload:json})
         }
     }
 
   return (
     <form onSubmit = {submitHandler}>
-        <h3>Add New Workout</h3>
+        <h2>Add New Workout</h2>
 
-        {success ? <p style = {{color:'green'}}>{success}</p> : ''}
+        {/* {success ? <p style = {{color:'green'}}>{success}</p> : ''} */}
 
         <label>Excercise Title:</label>
         <input 
