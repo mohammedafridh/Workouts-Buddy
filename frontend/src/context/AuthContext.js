@@ -28,6 +28,6 @@ export const AuthContextProvider = ({children})=>{
     )
 }
 
-export function useWorkoutContext(){
+export function useAuthContext(){
     return useContext(AuthContext)
 }

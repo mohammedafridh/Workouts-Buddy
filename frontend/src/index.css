@@ -158,6 +158,18 @@ nav a{
   font-weight: bold;
 }
 
+nav button{
+  background: #B0E0E6;
+  color: var(--error);
+  border: 3px solid var(--error);
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+
 form.signup{
   max-width: 300px;
   margin: 40px auto;
