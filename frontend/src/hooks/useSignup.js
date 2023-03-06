@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { useAuthContext } from '../context/AuthContext'
+import { toast } from 'react-hot-toast'
 
 const useSignup = () => {
 
@@ -28,6 +29,8 @@ const useSignup = () => {
 
             //update the auth context
             dispatch({type:'LOGIN', payload: json})
+
+            toast.success('Registered Successfully!')
 
             setIsLoading(false)
         }

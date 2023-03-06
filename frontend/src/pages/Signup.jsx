@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import useSignup from '../hooks/useSignup'
+import { toast } from 'react-hot-toast'
 
 const Signup = () => {
 
@@ -11,6 +12,7 @@ const Signup = () => {
     e.preventDefault()
 
     await signup(email,password)
+
   }
 
   return (

@@ -21,7 +21,8 @@ export const addWorkout = async(req,res)=>{
     }
 
     try{
-        const newWorkout = await workoutModel.create({title, load,reps})
+        const user_id = req.user._id
+        const newWorkout = await workoutModel.create({title, load,reps, user_id})
         res.status(200).json(newWorkout)
 
     }catch(error){
@@ -32,7 +33,8 @@ export const addWorkout = async(req,res)=>{
 //get all workouts
 
 export const getAllWorkouts = async(req,res)=>{
-    const workouts = await workoutModel.find({}).sort({createdAt: -1})
+    const user_id = req.user._id
+    const workouts = await workoutModel.find({user_id}).sort({createdAt: -1})
     res.status(200).json(workouts)
 }
 

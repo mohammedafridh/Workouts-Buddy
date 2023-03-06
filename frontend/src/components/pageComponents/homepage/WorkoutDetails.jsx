@@ -1,30 +1,47 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useWorkoutContext } from '../../../context/WorkoutContext'
 import {formatDistanceToNow} from 'date-fns'
 import { toast } from 'react-hot-toast'
+import { useAuthContext } from '../../../context/AuthContext'
 
 const WorkoutDetails = () => {
 
-    // const [workouts,setWorkouts] = useState([])
     const {workouts,dispatch} = useWorkoutContext()
+    const {user} = useAuthContext()
 
     useEffect(()=>{
         const fetchWorkouts = async()=>{
-            const response = await fetch("/workout/")
+            const response = await fetch("/workout/", {
+                headers:{
+                    'Authorization':`Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if(response.ok){
                 // setWorkouts(json)
                 dispatch({type:'setWorkouts', payload:json})
+                
             }
         }
 
+        if(user){
         fetchWorkouts()
-    },[dispatch, workouts])
+        }
+    },[workouts,user])
 
     const handleClick = async(id)=>{
+
+        if(!user){
+            toast.error('You must be logged in to do this action')
+            return
+        }
+
        const response =  await fetch('/workout/' + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers:{
+            'Authorization':`Bearer ${user.token}`
+        }
        })
 
        const json = await response.json()

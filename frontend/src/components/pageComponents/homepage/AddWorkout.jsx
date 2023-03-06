@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useWorkoutContext } from '../../../context/WorkoutContext'
 import { toast } from 'react-hot-toast'
+import { useAuthContext } from '../../../context/AuthContext'
 
 const AddWorkout = () => {
 
@@ -11,9 +12,16 @@ const AddWorkout = () => {
     const [emptyFields, setEmptyFields] = useState([])
     // const [success,setSuccess] = useState('')
     const {dispatch} = useWorkoutContext()
+    const {user} = useAuthContext()
 
     const submitHandler = async(e)=>{
         e.preventDefault()
+
+        if(!user){
+            toast.error('You must be logged in to do this action')
+            setError('You must be logged in')
+            return
+        }
 
         const workout = {title,reps,load}
 
@@ -21,7 +29,8 @@ const AddWorkout = () => {
             method:'POST',
             body: JSON.stringify(workout),
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${user.token}`
             }
         })
 
