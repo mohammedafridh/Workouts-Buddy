@@ -15,11 +15,11 @@ export const registerUser = async(req,res)=>{
     const hash = await bcrypt.hash(password, salt)
 
     try{
-        if(exists){
-            throw Error('Email Already Taken')
-        }
         if(!email || !password){
             throw Error('All fields must be filled')
+        }
+        if(exists){
+            throw Error('Email Already Taken')
         }
         if(!validator.isEmail(email)){
             throw Error('Email is not valid')

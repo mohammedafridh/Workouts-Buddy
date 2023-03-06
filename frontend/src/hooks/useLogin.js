@@ -1,9 +1,8 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 import { useAuthContext } from '../context/AuthContext'
 
 const useLogin = () => {
-
-    const[error,setError] = useState(null)
+    const[error,setError]= useState(null)
     const[isLoading,setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()
 
@@ -12,28 +11,26 @@ const useLogin = () => {
         setIsLoading(true)
 
         const response = await fetch('/user/login', {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({email,password})
-        })
+        method:'POST',
+        body:JSON.stringify({email,password}),
+        headers: {'Content-Type':'application/json'}
+    })
 
-        const json = await response.json()
+    const json = await response.json()
 
-        if(!response.ok){
-            setIsLoading(false)
-            setError(json.error)
-        }if(response.ok){
-            //save the user to local storage
-            localStorage.setItem('user', JSON.stringify(json))
+    if(!response.ok){
+        setError(json.error)
+        setIsLoading(false)
+    }if(response.ok){
+        localStorage.setItem('user', JSON.stringify(json))
 
-            //update the auth context
-            dispatch({type:'LOGIN', payload: json})
+        dispatch({type:"LOGIN", payload:json})
 
-            setIsLoading(false)
-        }
+        setIsLoading(false)
+    }
     }
 
-    return {login, isLoading, error}
+    return {login, error, isLoading}
 }
 
 export default useLogin
