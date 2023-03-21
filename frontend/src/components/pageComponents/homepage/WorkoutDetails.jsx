@@ -8,7 +8,9 @@ const WorkoutDetails = () => {
 
     const {workouts,dispatch} = useWorkoutContext()
     const {user} = useAuthContext()
+    const[item,setItem] = useState([])
 
+    //get all workouts
     useEffect(()=>{
         const fetchWorkouts = async()=>{
             const response = await fetch("/workout/", {
@@ -21,15 +23,16 @@ const WorkoutDetails = () => {
             if(response.ok){
                 // setWorkouts(json)
                 dispatch({type:'setWorkouts', payload:json})
-                
+                setItem(json)               
             }
         }
 
         if(user){
         fetchWorkouts()
         }
-    },[workouts,user])
+    },[user])
 
+    //delete workout
     const handleClick = async(id)=>{
 
         if(!user){
@@ -37,7 +40,7 @@ const WorkoutDetails = () => {
             return
         }
 
-       const response =  await fetch('/workout/' + id, {
+       const response =  await fetch(`/workout/${id}`, {
         method: 'DELETE',
         headers:{
             'Authorization':`Bearer ${user.token}`
@@ -47,7 +50,7 @@ const WorkoutDetails = () => {
        const json = await response.json()
 
        if(response.ok){
-        dispatch({type:'deleteWorkout', payload:json})
+        dispatch({type:'deleteWorkout', payload:id})
         toast.success('Workout Deleted Successfully!')
        }
     console.log(id)

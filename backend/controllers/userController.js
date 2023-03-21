@@ -49,27 +49,3 @@ export const loginUser = async(req,res)=>{
     }
    
 }
-
-// export const loginUser = async(req,res)=>{
-
-//     const{email,password} = req.body
-//     const user = await userModel.findOne({email})
-//     const match = await bcrypt.compare(password, user.password)
-
-
-//     try{
-//         if(!email || !password){
-//             throw Error('All fields must be filled')
-//         }if(!user){
-//             throw Error('Email does not exist!')
-//         }if(!match){
-//             throw Error('Password is incorrect')
-//         }else{
-//             // const login = await userModel.findOne({email})
-//             const token = createToken(user._id)
-//             res.status(200).json({user, token})
-//         }
-//     }catch(error){
-//         res.status(500).json({error:error.message})
-//     }
-// }

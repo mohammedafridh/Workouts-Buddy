@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import workoutModel from "../models/workoutModel.js";
 
 //add a workout
@@ -57,15 +58,31 @@ export const getWorkout = async(req,res)=>{
 //delete a workout
 
 export const deleteWorkout = async(req,res)=>{
-    const id = req.params.id
+    const {id} = req.params
 
     try{
-        await workoutModel.findByIdAndDelete(id)
-        res.status(200).json('Deleted Successfully!')
+        const workout = await workoutModel.findOneAndDelete({_id: id})
+        res.status(200).json(workout)
     }catch(error){
         res.status(500).json(error)
     }
 }
+
+// export const deleteWorkout = async(req,res)=>{
+//     const {id} = req.params
+
+//     if(!mongoose.Types.ObjectId.isValid(id)){
+//         res.status(404).json({error:'No such workout'})
+//     }
+
+//     const workout = await workoutModel.findOneAndDelete({_id:id})
+
+//     if(!workout){
+//         res.status(400).json({error:'No such workout'})
+//     }
+
+//     res.status(200).json(workout)
+// }
 
 //update a workout
 export const updateWorkout = async(req,res)=>{

@@ -16,7 +16,7 @@ export const WorkoutContextProvider = ({children})=>{
                 }
             case 'deleteWorkout':
                 return {
-                    workouts: state.workouts.filter((w)=>w._id !== action.payload._id)
+                    workouts: state.workouts.filter((w)=>w._id !== action.payload)
                 }
             default:
                 return state
@@ -26,6 +26,8 @@ export const WorkoutContextProvider = ({children})=>{
     const[state,dispatch] = useReducer(workoutsReducer, {
         workouts:null
     })
+
+    console.log('WorkoutContext state', state)
 
     return(
         <WorkoutContext.Provider value = {{...state,dispatch}}>
