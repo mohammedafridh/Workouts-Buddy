@@ -3,10 +3,12 @@ import bcrypt from 'bcrypt'
 import validator from 'validator'
 import jwt from 'jsonwebtoken'
 
+// generate token
 const createToken = (_id)=>{
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
 }
 
+// register user
 export const registerUser = async(req,res)=>{
     const {email,password} = req.body
 
@@ -37,6 +39,7 @@ export const registerUser = async(req,res)=>{
     }
 }
 
+// login user
 export const loginUser = async(req,res)=>{
     const {email,password} = req.body
 

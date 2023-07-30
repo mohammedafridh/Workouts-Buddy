@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import userModel from '../models/userModel.js'
+// import userModel from '../models/userModel.js'
 
 
 const requireAuth = async(req,res,next)=>{

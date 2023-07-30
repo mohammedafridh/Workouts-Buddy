@@ -23,9 +23,8 @@ export const addWorkout = async(req,res)=>{
 
     try{
         const user_id = req.user._id
-        const newWorkout = await workoutModel.create({title, load,reps, user_id})
+        const newWorkout = await workoutModel.create({title,load,reps,user_id})
         res.status(200).json(newWorkout)
-
     }catch(error){
         res.status(500).json({error:error.message})
     }
