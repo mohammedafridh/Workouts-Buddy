@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
+import validator from 'validator'
 
 const userSchema = mongoose.Schema({
     email:{
@@ -25,6 +26,9 @@ userSchema.statics.login = async function (email,password){
     //validation
     if(!email || !password){
         throw Error('All fields must be filled')
+    }
+    if(!validator.isEmail(email)){
+        throw Error('Email is not valid')
     }
     if(!user){
         throw Error('Email is not available')

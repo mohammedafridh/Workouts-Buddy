@@ -19,7 +19,7 @@ const Login = () => {
 
       <label>Email:</label>
       <input 
-      type='email'
+      type='text'
       onChange={(e)=>setEmail(e.target.value)}
       value = {email}
       />
